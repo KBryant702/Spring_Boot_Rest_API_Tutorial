@@ -21,9 +21,10 @@ public class PostController {
     }
 
     @PostMapping(path = "/strings")
-    public String addString() {
-        String string = "test";
+    public String addString(@RequestBody String string) {
+//        String string = "test";
         strings.add(string);
         return string;
     }
+
 }
