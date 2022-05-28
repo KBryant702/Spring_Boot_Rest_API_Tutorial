@@ -1,9 +1,6 @@
 package com.meritamerica.springdemo.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ public class PostController {
         return strings;
     }
 
-    @GetMapping(path = "/strings")
+    @PostMapping(path = "/strings")
     public String addString() {
         String string = "test";
         strings.add(string);
