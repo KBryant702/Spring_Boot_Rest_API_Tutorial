@@ -1,5 +1,6 @@
 package com.meritamerica.springdemo.controllers;
 
+import com.meritamerica.springdemo.models.Post;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 public class PostController {
 
     List<String> strings = new ArrayList<String>();
+    List<Post> posts = new ArrayList<Post>();
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String test() {
@@ -27,4 +29,14 @@ public class PostController {
         return string;
     }
 
+    @GetMapping(path = "/posts")
+    public List<Post> getPosts(){
+        return posts;
+    }
+
+    @PostMapping(path = "/posts")
+    public Post addPost(@RequestBody Post post){
+        posts.add(post);
+        return post;
+    }
 }
