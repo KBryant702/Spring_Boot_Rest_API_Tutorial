@@ -1,9 +1,11 @@
 package com.meritamerica.springdemo.controllers;
 
+import com.meritamerica.springdemo.exceptions.NoSuchResourceFoundException;
 import com.meritamerica.springdemo.models.Post;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,21 +26,30 @@ public class PostController {
     }
 
     @PostMapping(path = "/strings")
-    public String addString(@RequestBody String string) {
+    public String addString(@Valid @RequestBody String string) {
 //        String string = "test";
         strings.add(string);
         return string;
     }
 
     @GetMapping(path = "/posts")
-    public List<Post> getPosts(){
+    @ResponseStatus(HttpStatus.OK)
+    public List<Post> getPosts() {
         return posts;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/posts")
-    public Post addPost(@RequestBody Post post){
+    public Post addPost(@Valid @RequestBody Post post) {
         posts.add(post);
         return post;
+    }
+
+    @GetMapping(path = "/posts/{id}")
+    public Post getPostById(@PathVariable int id) throws NoSuchResourceFoundException {
+        if (id > posts.size() - 1) {
+            throw new NoSuchResourceFoundException("Invalid id");
+        }
+        return posts.get(id);
     }
 }
