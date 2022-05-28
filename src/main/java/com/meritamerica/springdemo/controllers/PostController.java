@@ -1,6 +1,7 @@
 package com.meritamerica.springdemo.controllers;
 
 import com.meritamerica.springdemo.models.Post;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class PostController {
         return posts;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(path = "/posts")
     public Post addPost(@RequestBody Post post){
         posts.add(post);
